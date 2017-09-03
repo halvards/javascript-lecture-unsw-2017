@@ -218,7 +218,7 @@
       </section>
     </aside>
     <hgroup>
-      <h2>ECMA-262 - Uneven pace of change</h2>
+      <h2>ECMA-262: Uneven pace of change</h2>
     </hgroup>
     <article>
       <center>
@@ -276,8 +276,8 @@
     <aside class="note">
       <section>
         <ul>
-          <li>Previously we had es3</li>
-          <li>We&#39;ll focus on es5 in this lecture</li>
+          <li>We'll use es6 in this lecture</li>
+          <li>I recommend es6 and transpile to es5 using Babel</li>
         </ul>
       </section>
     </aside>
@@ -285,28 +285,28 @@
       <h2>Today in the browser: es5</h2>
     </hgroup>
     <article class="flexbox vcenter">
-      <img src="images/ecmascript-5-standard-frontpage-683x383.png" alt="ECMAScript 5.1 Specification" style="width: 800px; height: 449px;">
-      <p><br><a href="http://www.ecma-international.org/ecma-262/5.1/">http://www.ecma-international.org/ecma-262/5.1/</a></p>
+      <img src="images/ecma262-5th-ed-2011-2034x1118.png" alt="ECMAScript 5.1 Specification" style="width: 800px; height: 440px;">
+      <p><a href="https://www.ecma-international.org/ecma-262/5.1/">https://www.ecma-international.org/ecma-262/5.1/</a></p>
     </article>
   </slide>
 
   <slide>
     <hgroup>
-      <h2>Today on the server: es6</h2>
+      <h2>Today on the server: es7 (a.k.a. ES2016)</h2>
     </hgroup>
     <article class="flexbox vcenter">
-      <img src="images/ecmascript-6-standard-frontpage-1724x918.png" alt="ECMAScript 2015 Specification" style="width: 800px; height: 426px;">
-      <p><br><a href="http://www.ecma-international.org/ecma-262/6.0/">http://www.ecma-international.org/ecma-262/6.0/</a></p>
+      <img src="images/ecma262-7th-ed-2016-1314x746.png" alt="ECMAScript 2016 Specification" style="width: 800px; height: 454px;">
+      <p><a href="https://www.ecma-international.org/ecma-262/7.0/">https://www.ecma-international.org/ecma-262/7.0/</a></p>
     </article>
   </slide>
 
   <slide>
     <hgroup>
-      <h2>Tomorrow: es7</h2>
+      <h2>Tomorrow: es8 (a.k.a. ES2017)</h2>
     </hgroup>
     <article class="flexbox vcenter">
-      <img src="images/ecmascript-7-draft-1034x436.png" alt="ECMAScript 2016 Specification" style="width: 800px; height: 337px;">
-      <p><br><a href="http://tc39.github.io/ecma262/">http://tc39.github.io/ecma262/</a></p>
+      <img src="images/ecma262-8th-ed-2017-1378x734.png" alt="ECMAScript 2017 Specification" style="width: 800px; height: 426px;">
+      <p><a href="https://www.ecma-international.org/ecma-262/8.0/">https://www.ecma-international.org/ecma-262/8.0/</a></p>
     </article>
   </slide>
 
@@ -378,7 +378,7 @@ Math.sqrt(-1);
 let empty = '';
 </pre>
       <pre class="prettyprint" data-lang="javascript">
-let helloWorld = 'Hello World!';
+let helloWorld = "Hello World!";
 </pre>
       <pre class="prettyprint" data-lang="javascript">
 let escaping = 'It<b>\'</b>s a glorious day!';
@@ -486,6 +486,30 @@ numbers.length;
     </article>
   </slide>
 
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>This changed in es6</li>
+          <li>If you write es6 or later, don't use var!</li>
+          <li>const is like final variable in Java</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Detour: Variables</h2>
+    </hgroup>
+    <article>
+      <p><code>var</code> was the only way to create variables prior to es6</p>
+      <p>es6/ES2015 introduced two new keywords:</p>
+      <ul>
+        <li><code>let</code> for variables that can be reassigned</li>
+        <li><code>const</code> for variables that can't be reassigned</li>
+      </ul>
+      <p>If you're writing es6 or later, don't use <code>var</code>!</p>
+    </article>
+  </slide>
+
   <slide class="segue dark nobackground">
     <aside class="twbar"></aside>
     <hgroup>
@@ -564,6 +588,7 @@ if (someVariable) {
       <section>
         <ul>
           <li>JavaScript has objects but not classes (!)</li>
+          <li>es6 introduced the concept of a class, but it's just syntactic sugar</li>
         </ul>
       </section>
     </aside>
@@ -602,8 +627,8 @@ child.greet();  // prints <b>"Hello Bob"</b> to the console
     <aside class="note">
       <section>
         <ul>
-          <li>I write better JavaScript code the more &quot;functional&quot; I make it.</li>
-          <li>It&#39;s a function expression</li>
+          <li>I write better JavaScript code the more "functional" I make it.</li>
+          <li>It's a function expression</li>
         </ul>
       </section>
     </aside>
@@ -621,7 +646,7 @@ let simpleFunction = function() {
       <p>We can also pass functions as arguments to other functions.</p>
       <p>And a function can return a function as output.</p>
       <pre class="prettyprint" data-lang="javascript">
-simpleFunction();  // prints "Hello World" to the console
+let simpleFunction = () => console.log("Hello World"); // es6 syntax
 </pre>
     </article>
   </slide>
@@ -661,12 +686,11 @@ function createFunction() {
     </hgroup>
     <article class="build">
       <div>
-        <!--<p>Definition:</p>-->
         <pre class="prettyprint" data-lang="javascript">
-const map = function(map_function, numbers_array) {
+function map(numbers, callback) {
     let result = [];
-    for (let i = 0; i < numbers_array.length; i++) {
-        result.push(map_function(numbers_array[i]));
+    for (let number of numbers) {
+        result.push(callback(number));
     };
     return result;
 };
@@ -675,10 +699,7 @@ const map = function(map_function, numbers_array) {
       <div>
         <p>Usage:</p>
         <pre class="prettyprint" data-lang="javascript">
-const square = function(num) {
-    return num * num;
-}
-map(square, [1, 2]);
+map([1, 2], (number) => num * num);
 >> [1, 4]
 </pre>
       </div>
@@ -712,7 +733,7 @@ let nestedExample = {
         "country": "Australia",
         "city":    "Sydney"
     },
-    "greeting": function() {
+    "greeting": () => {
         console.log("Hello World!");
     }
 }
@@ -734,13 +755,11 @@ let nestedExample = {
     <article class="build">
       <p>Inner functions can access variables of the functions they are defined within.</p>
       <pre class="prettyprint" data-lang="javascript">
-let outer = function() {
+let outer = () => {
     let outerVariable = 'hello';
 
     return {
-        inner: function() {
-            console.log(outerVariable);
-        }
+        inner: () => console.log(outerVariable);
     };
 };
 // outerVariable is no longer in scope
@@ -766,20 +785,17 @@ outer().inner();
     </hgroup>
     <article>
       <pre class="prettyprint" data-lang="javascript">
-const counter = () => {
+function counter() {
     let value = 0;
 
     return {
-        getValue: () => {
-            return value;
-        },
+        getValue: () => value,
         increment: () => {
             value += 1;
         }
     };
 }
-
-const myCounter = counter();  // create an instance
+let myCounter = counter();  // create an instance
 </pre>
       <p>Encapsulation: <code>value</code> can't be directly manipulated.</p>
     </article>
@@ -800,10 +816,8 @@ const myCounter = counter();  // create an instance
     <article>
       <p>Create a new function by supplying some arguments of an another function.</p>
       <pre class="prettyprint" data-lang="javascript">
-const describe = (adjective) => {
-  return (thing) => {
-    console.log(thing + " is " + adjective);
-  }
+function describe(adjective) {
+  return (thing) => console.log(thing + " is " + adjective);
 }
 
 let isAwesome = describe("awesome");
@@ -828,8 +842,9 @@ isEvenBetter("Sydney");
       <h2>Scoping</h2>
     </hgroup>
     <article>
-      <p>JavaScript uses C's block syntax (curly braces <code>{}</code>), but there's no block scope.</p>
-      <p>There are only two scopes: global scope and function scope.</p>
+      <p>JavaScript uses C's block syntax (curly braces <code>{}</code>), but there's no block scope for <code>var</code>.</p>
+      <p>There are only two scopes for <code>var</code>: global scope and function scope.</p>
+      <p><code>let</code> and <code>const</code> are block scoped.</p>
       <p>A variable defined without <code>var</code> is global. Never do this!</p>
       <p>A variable defined outside any function is global.</p>
       <p>A variable defined in a function only exists in that function.</p>
@@ -878,7 +893,7 @@ isEvenBetter("Sydney");
     <article class="build">
       <pre class="prettyprint" data-lang="javascript">
 let first = 0;
-const scopeTest = () => {
+let scopeTest = () => {
   let first = 1;
   console.log("first=" + first);
   if (true) {
@@ -933,6 +948,7 @@ while (queue.waitForEventMessage()) {
     <aside class="note">
       <section>
         <ul>
+          <li>IIFE</li>
           <li>Not 1, 2, 3</li>
           <li>There's only one variable named <code>i</code>, which is global.</li>
           <li>After the loop, <code>i === 4</code>, because it was incremented until it failed the loop condition.</li>
@@ -950,12 +966,11 @@ while (queue.waitForEventMessage()) {
       <div class="build">
         <div>
           <pre class="prettyprint" data-lang="javascript">
-const counter = () => {
+(function() {
     for (var i = 1; i <= 3; i++) {
-        setTimeout(() => { console.log(i); }, 0);
+        setTimeout(function() {console.log(i); }, 0);
     }
-}
-counter();
+})();
 </pre>
         </div>
         <div>
@@ -964,6 +979,42 @@ counter();
 >> 4
    4
    4
+</pre>
+          </div>
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>IIFE</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Event loop test using let</h2>
+    </hgroup>
+    <article>
+      <p><code>setTimeout(callbackFunction, delayMillis)</code></p>
+      <p>Adds <code>callbackFunction</code> as a message to the event queue, with a delay.</p>
+      <div class="build">
+        <div>
+          <pre class="prettyprint" data-lang="javascript">
+(() => {
+    for (let i = 1; i <= 3; i++) {
+        setTimeout(() => console.log(i), 0);
+    }
+})();
+</pre>
+        </div>
+        <div>
+          <p>Solution:</p>
+          <pre class="prettyprint" data-lang="javascript">
+>> 1
+   2
+   3
 </pre>
           </div>
       </div>
@@ -985,7 +1036,7 @@ counter();
     <article>
       <p>It's far too easy to create global variables!</p>
       <pre class="prettyprint" data-lang="javascript">
-const myFunction = () => {
+function myFunction() {
     global1 = 1;
     let nonGlobal = "I only exist inside myFunction";
 }
@@ -1031,7 +1082,6 @@ null == undefined  // true
     <aside class="twbar"></aside>
     <hgroup>
       <h2>Where do I start?</h2>
-      <!--<h3>Subtitle Placeholder</h3>-->
     </hgroup>
   </slide>
 
@@ -1046,12 +1096,12 @@ null == undefined  // true
       <section>
         <ul>
           <li>Mozilla Developer Network</li>
-          <li>Don&#39;t use w3schools!</li>
+          <li>Don't use w3schools!</li>
         </ul>
       </section>
     </aside>
     <article class="flexbox vcenter">
-      <img src="images/mozilla-developer-network-javascript-1218x906.png" alt="Mozilla Developer Network: JavaScript" style="width: 800px; height: 595px;">
+      <img src="images/mozilla-developer-network-javascript-1682x1168.png" alt="Mozilla Developer Network: JavaScript" style="width: 800px; height: 556px;">
     </article>
   </slide>
 
