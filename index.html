@@ -408,7 +408,7 @@ let escaping = 'It<b>\'</b>s a glorious day!';
     </hgroup>
     <article>
       <p>Arrays</p>
-      <p>Functions (more on this later!)</p>
+      <p>Functions</p>
       <p>Regular expressions</p>
       <p>Objects (duh!)</p>
     </article>
@@ -416,52 +416,11 @@ let escaping = 'It<b>\'</b>s a glorious day!';
 
   <slide>
     <hgroup>
-      <h2>More on objects</h2>
-    </hgroup>
-    <article>
-      <p>Containers of properties that are name/value pairs</p>
-      <p>Names can be any String</p>
-      <p>Values can be any expression</p>
-      <p>Mutable</p>
-      <p>Strings and Numbers are not objects (they are object-like but immutable)</p>
-    </article>
-  </slide>
-
-  <slide>
-    <hgroup>
-      <h2>Object usage</h2>
+      <h2>Arrays</h2>
     </hgroup>
     <article class="build">
       <div>
-        <p>Simple:</p>
-        <pre class="prettyprint" data-lang="javascript">
-let empty = {};
-let simple = { 'name': 'value', 'name2': 'value2' };
-</pre>
-      </div>
-      <div>
-        <p>Mutate:</p>
-        <pre class="prettyprint" data-lang="javascript">
-simple['another name'] = 'another value';
-</pre>
-      </div>
-      <div>
-        <p>Query:</p>
-        <pre class="prettyprint" data-lang="javascript">
-simple['name'];  // or simple.name;
->> 'value'
-</pre>
-      </div>
-    </article>
-  </slide>
-
-    <slide>
-    <hgroup>
-      <h2>Arrays</h2>
-    </hgroup>
-        <article class="build">
-      <div>
-        <p>Simple:</p>
+        <p>Create:</p>
         <pre class="prettyprint" data-lang="javascript">
 let empty = [];
 let numbers = [ 'zero', 'one' ];
@@ -490,23 +449,88 @@ numbers.length;
     <aside class="note">
       <section>
         <ul>
-          <li>This changed in es6</li>
-          <li>If you write es6 or later, don't use var!</li>
-          <li>const is like final variable in Java</li>
+          <li>This code doesn't print "Hello World" to the console, it only defines the function.</li>
+          <li>Functions are objects and so can be assigned to variables.</li>
+          <li>I write better JavaScript code the more "functional" I make it.</li>
         </ul>
       </section>
     </aside>
     <hgroup>
-      <h2>Detour: Variables</h2>
+      <h2>Functions</h2>
     </hgroup>
     <article>
-      <p><code>var</code> was the only way to create variables prior to es6</p>
-      <p>es6/ES2015 introduced two new keywords:</p>
-      <ul>
-        <li><code>let</code> for variables that can be reassigned</li>
-        <li><code>const</code> for variables that can't be reassigned</li>
-      </ul>
-      <p>If you're writing es6 or later, don't use <code>var</code>!</p>
+      <p>Functions statement:</p>
+      <pre class="prettyprint" data-lang="javascript">
+function hello(name) {
+    console.log('Hello ' + name);
+};
+</pre>
+      <p>Function expression:</p>
+      <pre class="prettyprint" data-lang="javascript">
+let hello = function(name) {
+    console.log('Hello ' + name);
+};
+</pre>
+      <p>es6 introduced the arrow syntax:</p>
+      <pre class="prettyprint" data-lang="javascript">
+let hello = (name) => console.log('Hello ' + name);
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Names can also be numbers, but this is a bad idea</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Regular objects</h2>
+    </hgroup>
+    <article>
+      <p>Containers of properties that are name/value pairs</p>
+      <p>Names can be any String</p>
+      <p>Values can be any expression</p>
+      <p>Mutable</p>
+      <p>Strings and Numbers are not objects (they are object-like but immutable)</p>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Names don't always need quotes.</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Object syntax</h2>
+    </hgroup>
+    <article class="build">
+      <div>
+        <p>Create:</p>
+        <pre class="prettyprint" data-lang="javascript">
+let empty = {};
+let simple = { 'name1': 'value1', 'name2': 'value2' };
+</pre>
+      </div>
+      <div>
+        <p>Mutate:</p>
+        <pre class="prettyprint" data-lang="javascript">
+simple['name1'] = 'changed';
+simple['another name'] = 'another value';
+</pre>
+      </div>
+      <div>
+        <p>Query:</p>
+        <pre class="prettyprint" data-lang="javascript">
+simple['name'];  // or simple.name;
+>> 'value'
+</pre>
+      </div>
     </article>
   </slide>
 
@@ -587,6 +611,24 @@ if (someVariable) {
     <aside class="note">
       <section>
         <ul>
+          <li></li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Prototypes</h2>
+    </hgroup>
+    <article>
+      <p></p>
+      <pre class="prettyprint" data-lang="javascript">
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
           <li>JavaScript has objects but not classes (!)</li>
           <li>es6 introduced the concept of a class, but it's just syntactic sugar</li>
         </ul>
@@ -601,10 +643,8 @@ if (someVariable) {
       <p>Another example:</p>
       <pre class="prettyprint" data-lang="javascript">
 let parent = {
-    'name': "Alice",
-    'greet': function() {
-        console.log("Hello " + this.name);
-    }
+    'name': 'Alice',
+    'greet': () => console.log('Hello ' + this.name);
 };
 </pre>
       <pre class="prettyprint" data-lang="javascript">
@@ -627,34 +667,6 @@ child.greet();  // prints <b>"Hello Bob"</b> to the console
     <aside class="note">
       <section>
         <ul>
-          <li>I write better JavaScript code the more "functional" I make it.</li>
-          <li>It's a function expression</li>
-        </ul>
-      </section>
-    </aside>
-    <hgroup>
-      <h2>More on functions</h2>
-    </hgroup>
-    <article>
-      <p>Functions are objects and can be assigned to variables.</p>
-      <pre class="prettyprint" data-lang="javascript">
-let simpleFunction = function() {
-    console.log("Hello World");
-};
-</pre>
-      <p>This code doesn't print "Hello World" to the console, it only defines the function.</p>
-      <p>We can also pass functions as arguments to other functions.</p>
-      <p>And a function can return a function as output.</p>
-      <pre class="prettyprint" data-lang="javascript">
-let simpleFunction = () => console.log("Hello World"); // es6 syntax
-</pre>
-    </article>
-  </slide>
-
-  <slide>
-    <aside class="note">
-      <section>
-        <ul>
           <li>What is printed to the console when we call createFunction()?</li>
         </ul>
       </section>
@@ -665,7 +677,7 @@ let simpleFunction = () => console.log("Hello World"); // es6 syntax
     <article>
       <pre class="prettyprint" data-lang="javascript">
 function createFunction() {
-    return function() {
+    return () => {
         console.log("Hello World");
     }
 }
@@ -674,23 +686,16 @@ function createFunction() {
   </slide>
 
   <slide>
-    <aside class="note">
-      <section>
-        <ul>
-          <li>map_function is usually referred to as a <em>callback</em> function</li>
-        </ul>
-      </section>
-    </aside>
     <hgroup>
       <h2>Functions as arguments</h2>
     </hgroup>
     <article class="build">
       <div>
         <pre class="prettyprint" data-lang="javascript">
-function map(numbers, callback) {
+function map(numbersArray, callbackFunction) {
     let result = [];
-    for (let number of numbers) {
-        result.push(callback(number));
+    for (let number of numbersArray) {
+        result.push(callbackFunction(number));
     };
     return result;
 };
@@ -699,14 +704,14 @@ function map(numbers, callback) {
       <div>
         <p>Usage:</p>
         <pre class="prettyprint" data-lang="javascript">
-map([1, 2], (number) => num * num);
+map([1, 2], (num) => num * num);
 >> [1, 4]
 </pre>
       </div>
     </article>
   </slide>
 
-    <slide>
+  <slide>
     <aside class="note">
       <section>
         <ul>
@@ -722,20 +727,18 @@ map([1, 2], (number) => num * num);
 let myArray = [1, 2, 3];
 
 let person = {
-    "firstName": "John",
-    "lastName":  "Smith",
+    'firstName': 'John',
+    'lastName':  'Smith',
 };
 
 let nestedExample = {
-    "firstName": "Jane",
-    "lastName":  "Smith",
-    "address": {
-        "country": "Australia",
-        "city":    "Sydney"
+    'firstName': 'Jane',
+    'lastName':  'Smith',
+    'address': {
+        'country': 'Australia',
+        'city':    'Sydney'
     },
-    "greeting": () => {
-        console.log("Hello World!");
-    }
+    'greeting': () => console.log('Hello World!');
 }
 </pre>
     </article>
@@ -785,7 +788,7 @@ outer().inner();
     </hgroup>
     <article>
       <pre class="prettyprint" data-lang="javascript">
-function counter() {
+let counter = () => {
     let value = 0;
 
     return {
@@ -806,7 +809,7 @@ let myCounter = counter();  // create an instance
       <section>
         <ul>
           <li>Not about food</li>
-          <li>Create a new function by supplying some arguments of an another function</li>
+          <li>Create a new function by supplying some arguments of another function</li>
         </ul>
       </section>
     </aside>
@@ -838,8 +841,32 @@ isEvenBetter("Sydney");
   </slide>
 
   <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>This changed in es6</li>
+          <li>If you write es6 or later, don't use var!</li>
+          <li>const is like final variable in Java</li>
+        </ul>
+      </section>
+    </aside>
     <hgroup>
-      <h2>Scoping</h2>
+      <h2>Detour: Variables</h2>
+    </hgroup>
+    <article>
+      <p><code>var</code> was the only way to create variables prior to es6</p>
+      <p>es6/ES2015 introduced two new keywords:</p>
+      <ul>
+        <li><code>let</code> for variables that can be reassigned</li>
+        <li><code>const</code> for variables that can't be reassigned</li>
+      </ul>
+      <p>If you're writing es6 or later, don't use <code>var</code>!</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Scoping with <code>var</code></h2>
     </hgroup>
     <article>
       <p>JavaScript uses C's block syntax (curly braces <code>{}</code>), but there's no block scope for <code>var</code>.</p>
@@ -1002,7 +1029,7 @@ while (queue.waitForEventMessage()) {
       <div class="build">
         <div>
           <pre class="prettyprint" data-lang="javascript">
-(() => {
+(function() {
     for (let i = 1; i <= 3; i++) {
         setTimeout(() => console.log(i), 0);
     }
