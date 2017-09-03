@@ -1,5 +1,5 @@
 Slides for university guest lecture on JavaScript, available here:
-<http://halvards.github.io/javascript-lecture-unsw-2016/>
+<https://halvards.github.io/javascript-lecture-unsw-2017/index.html>
 
 Delivered on Monday 4 September 2017.
 
