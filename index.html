@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Introduction to JavaScript</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<!-- <slides class="layout-widescreen"> -->
+<slides class="layout">
+
+    <!-- <p>Add <code><a href="?presentme=true" target="_self">?presentme=true</a></code> to the URL to enabled presenter mode. -->
+    <!-- This setting is sticky, meaning refreshing the page will persist presenter mode.</p> -->
+    <!-- <p>Hit <code><a href="?presentme=false" target="_self">?presentme=false</a></code> to disable presenter mode.</p> -->
+
+  <slide class="title-slide segue nobackground">
+    <aside class="twbar"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup>
+      <h1 data-config-title><!-- populated from slide_config.js --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.js --></h2>
+      <p data-config-presenter><!-- populated from slide_config.js --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <img src="images/javascript-all-the-things-meme.jpg" alt="JavaScript all the things meme" style="width: 800px; height: 600px;">
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Why JavaScript?</h2>
+    </hgroup>
+    <article>
+        <p>Ubiqutous</p>
+        <p>Quirky</p>
+        <p>Fun!</p>
+        <p>Popular!</p>
+        <p>A <em>humane</em> programming language (it has flaws)</p>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>The usual suspects</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Where can we use JavaScript?</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+      <img src="images/browser_logos-1439x269.png" alt="Browser logos" style="width: 100%;">
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>This one is a lot of fun.</li>
+          <li>A much better way to learn JavaScript than in a browser!</li>
+        </ul>
+      </section>
+    </aside>
+    <article class="flexbox vcenter">
+      <img src="images/nodejs_logo-800x215.png" alt="NodeJS logo" style="width: 800px; height: 215px;">
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <img src="images/raspberry-pi-1280x853.jpg" alt="Raspberry Pi" style="width: 800px; height: 533px;">
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <img src="images/arduino-uno-600x600.jpg" alt="Arduino Uno" style="width: 600px; height: 600px;">
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <img src="images/leap-motion-photo-1200x800.jpg" alt="Leap Motion" style="width: 800px; height: 533px;">
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <img src="images/postgresql-logo-with-name-999x1110.png" alt="PostgreSQL database logo" style="width: 500px; height: 555px;">
+    </article>
+  </slide>
+
+  <slide class="segue dark quote nobackground">
+    <aside class="twbar right bottom"></aside>
+    <article class="flexbox vleft">
+      <q>Any application that can be written in JavaScript, will eventually be written in JavaScript.</q>
+      <div class="author">
+        Atwood's Law, 2007<br>
+        Jeff Atwood, Stack Exchange (stackoverflow.com)
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <p><a href="https://www.reddit.com/r/atwoodslaw/">https://www.reddit.com/r/atwoodslaw/</a></p>
+      <img src="images/atwoodslaw-reddit-1848x944.png" alt="Atwood's Law group on Reddit" style="width: 800px; height: 408px;">
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Today's agenda</h2>
+    </hgroup>
+    <article>
+      <p>Something boring</p>
+      <p>Something necessary</p>
+      <p>Something interesting</p>
+      <p>Something awesome</p>
+      <p>Something surprising</p>
+      <p>Something bad</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Today's agenda in detail</h2>
+    </hgroup>
+    <article>
+      <p>Boring: A brief history of JavaScript</p>
+      <p>Necessary: The type system</p>
+      <p>Interesting: Truthiness, Prototypal inheritance</p>
+      <p>Awesome: First class functions, Object literals, Closures</p>
+      <p>Surprising: Scoping, Concurrency</p>
+      <p>Bad: Global variables, Equals, and more</p>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="twbar"></aside>
+    <hgroup>
+      <h2>A brief history of JavaScript</h2>
+      <h3>(actually not that boring)</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>From LISP: Symmetry between data and code</li>
+          <li>From Smalltalk: Patterns</li>
+          <li>From Self: Prototypal inheritance</li>
+          <li>From C: Curly bracket syntax</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>In the beginning...</h2>
+    </hgroup>
+    <article>
+      <p>In 1995, Netscape Navigator was the dominant web browser, but Microsoft was making inroads with Windows 95.</p>
+      <p>Netscape considered the web browser a new form of distributed OS, but it needed a lightweight scripting language.</p>
+      <p>They hired Brendan Eich in April 1995 and told him he had ten days to design a programming language.</p>
+      <p>Brendan created Mocha, later renamed to LiveScript, borrowing ideas from LISP, Smalltalk, Self and C.</p>
+      <p>Netscape Navigator 2.0 Beta was released in September 1995.</p>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>From Java: Name (nothing like leeching off the popularity of something else)</li>
+          <li>Ecma couldn't call it JavaScript due to licensing restrictions with Sun</li>
+          <li>stackoverflow.com: &quot;Java and JavaScript are similar like Car and Carpet are similar.&quot;</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>So why is it called JavaScript?</h2>
+    </hgroup>
+    <article>
+      <p>Java had just been released and was getting a lot of attention.</p>
+      <p>Netscape marketing changed the name from LiveScript to JavaScript in December 1995.</p>
+      <p>Netscape Navigator 2.0 with JavaScript support launched in March 1996.</p>
+      <p>Netscape delivered JavaScript to Ecma International for standardisation.</p>
+      <p>June 1997: First edition of ECMA-262 ECMAScript Language Specification.</p>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>What happened to the 4th Edition? Never published.</li>
+          <li>Two big gaps: 3-5 and 5-6</li>
+          <li>Now new editions each year</li>
+          <li>es5 widely understood</li>
+          <li>Recommend writing es6 or es7 and transpiling</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>ECMA-262 - Uneven pace of change</h2>
+    </hgroup>
+    <article>
+      <center>
+        <table style="width: 70%;">
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Edition</th>
+              <th>Nickname</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1997</td>
+              <td>First published</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>1998</td>
+              <td>2nd Edition</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>1999</td>
+              <td>3rd Edition</td>
+              <td>es3</td>
+            </tr>
+            <tr>
+              <td>2011</td>
+              <td>5.1 Edition</td>
+              <td>es5</td>
+            </tr>
+            <tr>
+              <td>2015</td>
+              <td>ECMAScript 2015 (6th Edition)</td>
+              <td>es6 or ES2015</td>
+            </tr>
+            <tr>
+              <td>2016</td>
+              <td>ECMAScript 2016 (7th Edition)</td>
+              <td>es7 or ES2016</td>
+            </tr>
+            <tr>
+              <td>2017</td>
+              <td>ECMAScript 2017 (8th Edition)</td>
+              <td>es8 or ES2017</td>
+            </tr>
+          </tbody>
+        </table>
+      </center>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Previously we had es3</li>
+          <li>We&#39;ll focus on es5 in this lecture</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Today in the browser: es5</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+      <img src="images/ecmascript-5-standard-frontpage-683x383.png" alt="ECMAScript 5.1 Specification" style="width: 800px; height: 449px;">
+      <p><br><a href="http://www.ecma-international.org/ecma-262/5.1/">http://www.ecma-international.org/ecma-262/5.1/</a></p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Today on the server: es6</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+      <img src="images/ecmascript-6-standard-frontpage-1724x918.png" alt="ECMAScript 2015 Specification" style="width: 800px; height: 426px;">
+      <p><br><a href="http://www.ecma-international.org/ecma-262/6.0/">http://www.ecma-international.org/ecma-262/6.0/</a></p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Tomorrow: es7</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+      <img src="images/ecmascript-7-draft-1034x436.png" alt="ECMAScript 2016 Specification" style="width: 800px; height: 337px;">
+      <p><br><a href="http://tc39.github.io/ecma262/">http://tc39.github.io/ecma262/</a></p>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="twbar"></aside>
+    <hgroup>
+      <h2>The type system</h2>
+      <h3>(it's quite simple)</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>This looks easy!</li>
+          <li>Objects: more on these later</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Types</h2>
+    </hgroup>
+    <article>
+      <p>Number</p>
+      <p>String</p>
+      <p>Boolean (<code>true</code> and <code>false</code>)</p>
+      <p>Null (<code>null</code>)</p>
+      <p>Undefined (<code>undefined</code>)</p>
+      <p>Object (a few types)</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Number usage</h2>
+    </hgroup>
+    <article class="build">
+      <pre class="prettyprint" data-lang="javascript">
+let aNumber = 1;
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+let anotherNumber = 0.1;
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+1 / 0;
+>> Infinity
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+Math.sqrt(-1);
+>> NaN  // not a number
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+0.1 + 0.2;
+>> 0.30000000000000004
+</pre>
+      <!--<img src="images/emoticon_surprised-395x359.jpg" alt="Surprised" style="width: 158px; height: 144px;">-->
+      <!--<img src="images/emoticon_shocked-300x300.png" alt="Shocked" style="width: 150px; height: 150px;">-->
+      <p>JavaScript uses binary floating point arithmetic (IEEE 754).</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>String usage</h2>
+    </hgroup>
+    <article class="build">
+      <pre class="prettyprint" data-lang="javascript">
+let empty = '';
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+let helloWorld = 'Hello World!';
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+let escaping = 'It<b>\'</b>s a glorious day!';
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+'abc' + 'def';
+>> 'abcdef'
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+1 + '2';
+>> '12'
+</pre>
+      <p>JavaScript does some type coercion (Number to String here).</p>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>I will not cover regular expressions here</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Objects</h2>
+    </hgroup>
+    <article>
+      <p>Arrays</p>
+      <p>Functions (more on this later!)</p>
+      <p>Regular expressions</p>
+      <p>Objects (duh!)</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>More on objects</h2>
+    </hgroup>
+    <article>
+      <p>Containers of properties that are name/value pairs</p>
+      <p>Names can be any String</p>
+      <p>Values can be any expression</p>
+      <p>Mutable</p>
+      <p>Strings and Numbers are not objects (they are object-like but immutable)</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Object usage</h2>
+    </hgroup>
+    <article class="build">
+      <div>
+        <p>Simple:</p>
+        <pre class="prettyprint" data-lang="javascript">
+let empty = {};
+let simple = { 'name': 'value', 'name2': 'value2' };
+</pre>
+      </div>
+      <div>
+        <p>Mutate:</p>
+        <pre class="prettyprint" data-lang="javascript">
+simple['another name'] = 'another value';
+</pre>
+      </div>
+      <div>
+        <p>Query:</p>
+        <pre class="prettyprint" data-lang="javascript">
+simple['name'];  // or simple.name;
+>> 'value'
+</pre>
+      </div>
+    </article>
+  </slide>
+
+    <slide>
+    <hgroup>
+      <h2>Arrays</h2>
+    </hgroup>
+        <article class="build">
+      <div>
+        <p>Simple:</p>
+        <pre class="prettyprint" data-lang="javascript">
+let empty = [];
+let numbers = [ 'zero', 'one' ];
+</pre>
+      </div>
+      <div>
+        <p>Mutate:</p>
+        <pre class="prettyprint" data-lang="javascript">
+numbers.push('two');   // [ 'zero', 'one', 'two' ]
+numbers[0] = 'zilch';  // [ 'zilch', 'one', 'two' ]
+</pre>
+      </div>
+      <div>
+        <p>Query:</p>
+        <pre class="prettyprint" data-lang="javascript">
+numbers[1];
+>> 'one'
+numbers.length;
+>> 3
+</pre>
+      </div>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="twbar"></aside>
+    <hgroup>
+      <h2>Interesting parts</h2>
+      <h3>Truthiness, prototypal inheritance</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Truthy and falsy</h2>
+    </hgroup>
+    <article>
+      <p>All expressions are either <em>truthy</em> or <em>falsy</em>.</p>
+      <p>This can be used in conditional expressions:</p>
+      <pre class="prettyprint" data-lang="javascript">
+if (someVariable) {
+    console.log("<b>this only executes if someVariable is truthy</b>");
+}
+</pre>
+      <p>Can be used as a simple check for <code>null</code>, <code>undefined</code>, <code>NaN</code> and more.</p>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>All other expressions are truthy.</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Falsy values</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+      <table style="width: 50%;">
+        <thead>
+          <tr>
+            <th>Value</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>0</code> (zero)</td>
+            <td>Number</td>
+          </tr>
+          <tr>
+            <td><code>NaN</code> (not a number)</td>
+            <td>Number</td>
+          </tr>
+          <tr>
+            <td><code>''</code> (empty string)</td>
+            <td>String</td>
+          </tr>
+          <tr>
+            <td><code>false</code></td>
+            <td>Boolean</td>
+          </tr>
+          <tr>
+            <td><code>null</code></td>
+            <td>Object</td>
+          </tr>
+          <tr>
+            <td><code>undefined</code></td>
+            <td>Undefined</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>JavaScript has objects but not classes (!)</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Prototypal inheritance</h2>
+    </hgroup>
+    <article>
+      <p>A new object can inherit properties of an existing object.</p>
+      <p>Example: Arrays inherit properties of the Array prototype object, such as <code>length</code></p>
+      <p>Another example:</p>
+      <pre class="prettyprint" data-lang="javascript">
+let parent = {
+    'name': "Alice",
+    'greet': function() {
+        console.log("Hello " + this.name);
+    }
+};
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+let child = Object.create(parent);
+child['name'] = "Bob";
+child.greet();  // prints <b>"Hello Bob"</b> to the console
+</pre>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="twbar"></aside>
+    <hgroup>
+      <h2>Awesome parts</h2>
+      <h3>First class functions, Object literals, Closures</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>I write better JavaScript code the more &quot;functional&quot; I make it.</li>
+          <li>It&#39;s a function expression</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>More on functions</h2>
+    </hgroup>
+    <article>
+      <p>Functions are objects and can be assigned to variables.</p>
+      <pre class="prettyprint" data-lang="javascript">
+let simpleFunction = function() {
+    console.log("Hello World");
+};
+</pre>
+      <p>This code doesn't print "Hello World" to the console, it only defines the function.</p>
+      <p>We can also pass functions as arguments to other functions.</p>
+      <p>And a function can return a function as output.</p>
+      <pre class="prettyprint" data-lang="javascript">
+simpleFunction();  // prints "Hello World" to the console
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>What is printed to the console when we call createFunction()?</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Functions as return types</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+function createFunction() {
+    return function() {
+        console.log("Hello World");
+    }
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>map_function is usually referred to as a <em>callback</em> function</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Functions as arguments</h2>
+    </hgroup>
+    <article class="build">
+      <div>
+        <!--<p>Definition:</p>-->
+        <pre class="prettyprint" data-lang="javascript">
+const map = function(map_function, numbers_array) {
+    let result = [];
+    for (let i = 0; i < numbers_array.length; i++) {
+        result.push(map_function(numbers_array[i]));
+    };
+    return result;
+};
+</pre>
+      </div>
+      <div>
+        <p>Usage:</p>
+        <pre class="prettyprint" data-lang="javascript">
+const square = function(num) {
+    return num * num;
+}
+map(square, [1, 2]);
+>> [1, 4]
+</pre>
+      </div>
+    </article>
+  </slide>
+
+    <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Not exactly the same as JSON</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Object literals</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+let myArray = [1, 2, 3];
+
+let person = {
+    "firstName": "John",
+    "lastName":  "Smith",
+};
+
+let nestedExample = {
+    "firstName": "Jane",
+    "lastName":  "Smith",
+    "address": {
+        "country": "Australia",
+        "city":    "Sydney"
+    },
+    "greeting": function() {
+        console.log("Hello World!");
+    }
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>This is very cool! Impress your friends.</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Closures</h2>
+    </hgroup>
+    <article class="build">
+      <p>Inner functions can access variables of the functions they are defined within.</p>
+      <pre class="prettyprint" data-lang="javascript">
+let outer = function() {
+    let outerVariable = 'hello';
+
+    return {
+        inner: function() {
+            console.log(outerVariable);
+        }
+    };
+};
+// outerVariable is no longer in scope
+
+outer().inner();
+>> 'hello'
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>No visibility modifiers in JavaScript, no public, private, etc.</li>
+          <li>So how do we achieve encapsulation?</li>
+          <li>es6 introduces classes</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Function closures as pseudo-classes</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+const counter = () => {
+    let value = 0;
+
+    return {
+        getValue: () => {
+            return value;
+        },
+        increment: () => {
+            value += 1;
+        }
+    };
+}
+
+const myCounter = counter();  // create an instance
+</pre>
+      <p>Encapsulation: <code>value</code> can't be directly manipulated.</p>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Not about food</li>
+          <li>Create a new function by supplying some arguments of an another function</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Currying</h2>
+    </hgroup>
+    <article>
+      <p>Create a new function by supplying some arguments of an another function.</p>
+      <pre class="prettyprint" data-lang="javascript">
+const describe = (adjective) => {
+  return (thing) => {
+    console.log(thing + " is " + adjective);
+  }
+}
+
+let isAwesome = describe("awesome");
+let isEvenBetter = describe("even better");
+
+isAwesome("Melbourne");
+isEvenBetter("Sydney");
+</pre>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="twbar"></aside>
+    <hgroup>
+      <h2>Surprising parts</h2>
+      <h3>Scoping, Concurrency</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Scoping</h2>
+    </hgroup>
+    <article>
+      <p>JavaScript uses C's block syntax (curly braces <code>{}</code>), but there's no block scope.</p>
+      <p>There are only two scopes: global scope and function scope.</p>
+      <p>A variable defined without <code>var</code> is global. Never do this!</p>
+      <p>A variable defined outside any function is global.</p>
+      <p>A variable defined in a function only exists in that function.</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>var vs let</h2>
+    </hgroup>
+    <article class="build">
+      <pre class="prettyprint" data-lang="javascript">
+() => {
+    if (condition) {
+        var mystring = "hello";
+    }
+    // mystring = "hello"
+}
+// mystring is no longer in scope
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+() => {
+    if (condition) {
+        let mystring = "hello";
+    }
+    // mystring is no longer in scope
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>There are two variables called <code>first</code></li>
+          <li>One is global scoped, the other is function scoped.</li>
+          <li>In the scopeTest function, the function scoped variable <code>first</code> <em>hides</em> the globally scoped variable <code>first</code></li>
+          <li><code>second</code> is scoped to the <code>scopeTest()</code> function, <em>not</em> the if statement block.</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Scoping test</h2>
+    </hgroup>
+    <article class="build">
+      <pre class="prettyprint" data-lang="javascript">
+let first = 0;
+const scopeTest = () => {
+  let first = 1;
+  console.log("first=" + first);
+  if (true) {
+      var second = 2;
+  }
+  console.log("second=" + second);
+};
+scopeTest();
+console.log("first=" + first);
+console.log("second=" + second);
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+>> first=1
+   second=2
+   first=0
+   ReferenceError: second is not defined
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Simple concurrency model based on an event loop</li>
+          <li>Parallellism is supported in browsers via iframes and web workers. Not covered here.</li>
+          <li>Browser event: key is pressed, mouse hovers over area, etc.</li>
+          <li>Elsewhere (NodeJS): <code>setTimeout()</code>, <code>setInterval()</code>, etc.</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Concurrency: the event loop</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+while (queue.waitForEventMessage()) {
+  queue.processNextEventMessage();
+}
+</pre>
+      <p>Each event message is processed completely before any other message is processed.</p>
+      <p>No multi-threading support, as in C, Java, others.</p>
+      <p>How are event messages added to the queue?</p>
+      <ul>
+        <li>In a browser: When a user interface event happens and an event listener is is attached.</li>
+        <li>Elsewhere: <code>setTimeout()</code> and friends</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Not 1, 2, 3</li>
+          <li>There's only one variable named <code>i</code>, which is global.</li>
+          <li>After the loop, <code>i === 4</code>, because it was incremented until it failed the loop condition.</li>
+          <li>New event messages are not processed until the current executing event is completed.</li>
+          <li>That last one is a surprise!</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Event loop test</h2>
+    </hgroup>
+    <article>
+      <p><code>setTimeout(callbackFunction, delayMillis)</code></p>
+      <p>Adds <code>callbackFunction</code> as a message to the event queue, with a delay.</p>
+      <div class="build">
+        <div>
+          <pre class="prettyprint" data-lang="javascript">
+const counter = () => {
+    for (var i = 1; i <= 3; i++) {
+        setTimeout(() => { console.log(i); }, 0);
+    }
+}
+counter();
+</pre>
+        </div>
+        <div>
+          <p>Solution:</p>
+          <pre class="prettyprint" data-lang="javascript">
+>> 4
+   4
+   4
+</pre>
+          </div>
+      </div>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="twbar"></aside>
+    <hgroup>
+      <h2>Bad parts</h2>
+      <h3>Global variables, Equals, and more</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Global variables</h2>
+    </hgroup>
+    <article>
+      <p>It's far too easy to create global variables!</p>
+      <pre class="prettyprint" data-lang="javascript">
+const myFunction = () => {
+    global1 = 1;
+    let nonGlobal = "I only exist inside myFunction";
+}
+var global2 = 2;
+window.global3 = 3;
+</pre>
+      <p><code>global1</code> is global because we forgot <code>let/const/var</code></p>
+      <p><code>global2</code> is global because we declared it as a <code>var</code> outside of a function or object</p>
+      <p><code>global3</code> is global because we added it to the global web browser <code>window</code> object</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Equals</h2>
+    </hgroup>
+    <article>
+      <p>JavaScript has both <code>==</code> and <code>===</code> (as well as <code>!=</code> and <code>!==</code>)</p>
+      <p><code>==</code> performs type coercion when the arguments are not of the same type, using strange rules:</p>
+      <pre class="prettyprint" data-lang="javascript">
+0 == ''            // true
+'0' == ''          // true
+'' == '0'          // false
+
+false == '0'       // true
+null == undefined  // true
+
+' \t\r\n ' == 0    // true
+</pre>
+      <p>Lesson: Use <code>===</code> and <code>!==</code></p>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="note">
+      <section>
+        <ul>
+          <li>There are plenty of terrible JavaScript books and online articles.</li>
+          <li>JQuery plugins: great examples of terrible code</li>
+        </ul>
+      </section>
+    </aside>
+    <aside class="twbar"></aside>
+    <hgroup>
+      <h2>Where do I start?</h2>
+      <!--<h3>Subtitle Placeholder</h3>-->
+    </hgroup>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <img src="images/javascript-good-parts-cover-500x656.jpg" alt="JavaScript: The Good Parts book cover" style="width: 500px; height: 656px;">
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Mozilla Developer Network</li>
+          <li>Don&#39;t use w3schools!</li>
+        </ul>
+      </section>
+    </aside>
+    <article class="flexbox vcenter">
+      <img src="images/mozilla-developer-network-javascript-1218x906.png" alt="Mozilla Developer Network: JavaScript" style="width: 800px; height: 595px;">
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <img src="images/nodejs_logo-800x215.png" alt="NodeJS logo" style="width: 800px; height: 215px;">
+    </article>
+  </slide>
+
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="twbar right"></aside>
+    <article class="flexbox vleft">
+      <h2>Thank you!</h2>
+    </article>
+    <!--<p class="auto-fadein" data-config-contact>-->
+    <p data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>References</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Douglas Crockford: <a href="http://shop.oreilly.com/product/9780596517748.do">JavaScript: The Good Parts</a>, O'Reilly</li>
+        <li>es5: <a href="http://www.ecma-international.org/ecma-262/5.1/">ECMAScript Language Specification, 5.1 Edition</a></li>
+        <li>es6: <a href="http://www.ecma-international.org/ecma-262/6.0/">ECMAScript 2015 Language Specification</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Mozilla Developer Network: JavaScript</a></li>
+        <li>Trevor Burnham: <a href="http://javascriptjabber.com/124-jsj-the-origin-of-javascript-with-brendan-eich/">The Origin of Javascript with Brendan Eich</a>, JavaScript Jabber, Episode 124, 3 Sept 2014</li>
+        <li>Charles Severance: <a href="http://www.computer.org/csdl/mags/co/2012/02/mco2012020007.html">JavaScript: Designing a Language in 10 Days</a>, IEEE Computer, Feb 2012</li>
+        <li>Paul Krill: <a href="http://www.infoworld.com/d/developer-world/javascript-creator-ponders-past-future-704">JavaScript creator ponders past, future</a>, 23 June 2008</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
