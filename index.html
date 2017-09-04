@@ -78,7 +78,7 @@
       </section>
     </aside>
     <article class="flexbox vcenter">
-      <img src="images/nodejs_logo-800x215.png" alt="NodeJS logo" style="width: 800px; height: 215px;">
+      <img src="images/nodejs_logo-800x215.png" alt="Node.js logo" style="width: 800px; height: 215px;">
     </article>
   </slide>
 
@@ -850,7 +850,7 @@ class Person {  // es6 and later only
       <h2>Inheritance using <code>Object.create()</code></h2>
     </hgroup>
     <article>
-      <p>The first argument to Object.create() is the prototype object of the newly created object.</p>
+      <p>The first argument to <code>Object.create()</code> will be the prototype object of the newly created object.</p>
       <pre class="prettyprint" data-lang="javascript">
 let parent = {
     'name': 'Alice',
@@ -864,8 +864,8 @@ child.greet();
 >> 'Hello'
 child.name;
 >> 'Bob'
-Object.getPrototypeOf(child).name;
->> 'Alice'
+Object.getPrototypeOf(child);
+>> { name: 'Alice', greet: [Function: greet] }
 </pre>
     </article>
   </slide>
@@ -1013,10 +1013,9 @@ isEvenBetter('Sydney');
     </hgroup>
     <article>
       <p>JavaScript uses C's block syntax (curly braces <code>{}</code>), but there's no block scope for <code>var</code>.</p>
-      <p>There are only two scopes for <code>var</code>: global scope and function scope.</p>
-      <p><code>let</code> and <code>const</code> are block scoped.</p>
+      <p><code>var</code> has only two scopes: global and function.</p>
       <p>A variable defined without <code>var</code> is global. Never do this!</p>
-      <p>A variable defined outside any function is global.</p>
+      <p>A variable defined using <code>var</code> outside any function is global.</p>
       <p>A variable defined in a function only exists in that function.</p>
     </article>
   </slide>
@@ -1034,7 +1033,7 @@ isEvenBetter('Sydney');
     <hgroup>
       <h2>var vs let</h2>
     </hgroup>
-    <article class="build">
+    <article>
       <pre class="prettyprint" data-lang="javascript">
 () => {
     if (condition) {
@@ -1067,7 +1066,7 @@ isEvenBetter('Sydney');
       </section>
     </aside>
     <hgroup>
-      <h2>Scoping test</h2>
+      <h2>Scoping test with <code>var</code></h2>
     </hgroup>
     <article class="build">
       <pre class="prettyprint" data-lang="javascript">
@@ -1100,7 +1099,7 @@ console.log(`second=${second}`);
           <li>Simple concurrency model based on an event loop</li>
           <li>Parallellism is supported in browsers via iframes and web workers. Not covered here.</li>
           <li>Browser event: key is pressed, mouse hovers over area, etc.</li>
-          <li>Elsewhere (NodeJS): <code>setTimeout()</code>, <code>setInterval()</code>, etc.</li>
+          <li>Elsewhere (Node.js): <code>setTimeout()</code>, <code>setInterval()</code>, etc.</li>
         </ul>
       </section>
     </aside>
@@ -1140,8 +1139,8 @@ while (queue.waitForEventMessage()) {
       <h2>Event loop test</h2>
     </hgroup>
     <article>
-      <p><code>setTimeout(callbackFunction, delayMillis)</code></p>
-      <p>Adds <code>callbackFunction</code> as a message to the event queue, with a delay.</p>
+      <p><code>setTimeout(callback, delayMillis)</code></p>
+      <p>Adds <code>callback</code> as a message to the event queue, with a delay.</p>
       <div class="build">
         <div>
           <pre class="prettyprint" data-lang="javascript">
@@ -1176,8 +1175,8 @@ while (queue.waitForEventMessage()) {
       <h2>Event loop test using let</h2>
     </hgroup>
     <article>
-      <p><code>setTimeout(callbackFunction, delayMillis)</code></p>
-      <p>Adds <code>callbackFunction</code> as a message to the event queue, with a delay.</p>
+      <p><code>setTimeout(callback, delayMillis)</code></p>
+      <p>Adds <code>callback</code> as a message to the event queue, with a delay.</p>
       <div class="build">
         <div>
           <pre class="prettyprint" data-lang="javascript">
@@ -1217,7 +1216,7 @@ while (queue.waitForEventMessage()) {
       <pre class="prettyprint" data-lang="javascript">
 function myFunction() {
     global1 = 1;
-    let nonGlobal = 'I only exist inside myFunction';
+    var nonGlobal = 'I only exist inside myFunction';
 }
 var global2 = 2;
 window.global3 = 3;
@@ -1286,7 +1285,7 @@ null == undefined  // true
 
   <slide>
     <article class="flexbox vcenter">
-      <img src="images/nodejs_logo-800x215.png" alt="NodeJS logo" style="width: 800px; height: 215px;">
+      <img src="images/nodejs_logo-800x215.png" alt="Node.js logo" style="width: 800px; height: 215px;">
     </article>
   </slide>
 
@@ -1306,10 +1305,11 @@ null == undefined  // true
       <h2>References</h2>
     </hgroup>
     <article>
-      <ul>
+      <ul style="line-height: 120%;">
         <li>Douglas Crockford: <a href="http://shop.oreilly.com/product/9780596517748.do">JavaScript: The Good Parts</a>, O'Reilly</li>
         <li>es5: <a href="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript Language Specification, 5.1 Edition</a></li>
-        <li>es6: <a href="https://www.ecma-international.org/ecma-262/7.0/">ECMAScript 2016 Language Specification</a></li>
+        <li>es6: <a href="https://www.ecma-international.org/ecma-262/6.0/">ECMAScript 2015 Language Specification</a></li>
+        <li>es7: <a href="https://www.ecma-international.org/ecma-262/7.0/">ECMAScript 2016 Language Specification</a></li>
         <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Mozilla Developer Network: JavaScript</a></li>
         <li>Trevor Burnham: <a href="https://devchat.tv/js-jabber/124-jsj-the-origin-of-javascript-with-brendan-eich">The Origin of Javascript with Brendan Eich</a>, JavaScript Jabber, Episode 124, 3 Sept 2014</li>
         <li>Charles Severance: <a href="https://www.computer.org/csdl/mags/co/2012/02/mco2012020007.html">JavaScript: Designing a Language in 10 Days</a>, IEEE Computer, Feb 2012</li>
