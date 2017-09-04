@@ -370,6 +370,13 @@ Math.sqrt(-1);
   </slide>
 
   <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>JavaScript does some type coercion (Number to String here).</li>
+        </ul>
+      </section>
+    </aside>
     <hgroup>
       <h2>String usage</h2>
     </hgroup>
@@ -381,17 +388,21 @@ let empty = '';
 let helloWorld = "Hello World!";
 </pre>
       <pre class="prettyprint" data-lang="javascript">
-let escaping = 'It<b>\'</b>s a glorious day!';
+let escaping = 'It\'s a glorious day!';
 </pre>
       <pre class="prettyprint" data-lang="javascript">
-'abc' + 'def';
+'abc' + "def";
 >> 'abcdef'
 </pre>
       <pre class="prettyprint" data-lang="javascript">
 1 + '2';
 >> '12'
 </pre>
-      <p>JavaScript does some type coercion (Number to String here).</p>
+      <pre class="prettyprint" data-lang="javascript">
+let name = 'Alice';
+`Hello ${name}`; // es6 and later, using backtick (`), not quote (')
+>> 'Hello Alice'
+</pre>
     </article>
   </slide>
 
@@ -482,12 +493,60 @@ let hello = (name) => console.log('Hello ' + name);
     <aside class="note">
       <section>
         <ul>
+          <li>What is printed to the console when we call createFunction()?</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Functions as return types</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+function createFunction() {
+    return () => {
+        console.log('Hello World');
+    }
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Functions as arguments</h2>
+    </hgroup>
+    <article class="build">
+      <div>
+        <pre class="prettyprint" data-lang="javascript">
+function map(numbersArray, callbackFunction) {
+    let result = [];
+    for (let number of numbersArray) {
+        result.push(callbackFunction(number));
+    };
+    return result;
+};
+</pre>
+      </div>
+      <div>
+        <p>Usage:</p>
+        <pre class="prettyprint" data-lang="javascript">
+map([1, 2], (num) => { return num * num; );
+>> [1, 4]
+</pre>
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
           <li>Names can also be numbers, but this is a bad idea</li>
         </ul>
       </section>
     </aside>
     <hgroup>
-      <h2>Regular objects</h2>
+      <h2>Objects</h2>
     </hgroup>
     <article>
       <p>Containers of properties that are name/value pairs</p>
@@ -534,11 +593,44 @@ simple['name'];  // or simple.name;
     </article>
   </slide>
 
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Not exactly the same as JSON</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Object literals</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+let myArray = [1, 2, 3];
+
+let person = {
+    'firstName': 'John',
+    'lastName':  'Smith',
+};
+
+let nestedExample = {
+    'firstName': 'Jane',
+    'lastName':  'Smith',
+    'address': {
+        'country': 'Australia',
+        'city':    'Sydney'
+    },
+    'greeting': () => console.log('Hello World!');
+}
+</pre>
+    </article>
+  </slide>
+
   <slide class="segue dark nobackground">
     <aside class="twbar"></aside>
     <hgroup>
       <h2>Interesting parts</h2>
-      <h3>Truthiness, prototypal inheritance</h3>
+      <h3>Truthiness, Prototypes</h3>
     </hgroup>
   </slide>
 
@@ -551,7 +643,7 @@ simple['name'];  // or simple.name;
       <p>This can be used in conditional expressions:</p>
       <pre class="prettyprint" data-lang="javascript">
 if (someVariable) {
-    console.log("<b>this only executes if someVariable is truthy</b>");
+    console.log('this only executes if someVariable is truthy');
 }
 </pre>
       <p>Can be used as a simple check for <code>null</code>, <code>undefined</code>, <code>NaN</code> and more.</p>
@@ -611,7 +703,7 @@ if (someVariable) {
     <aside class="note">
       <section>
         <ul>
-          <li></li>
+          <li>Deserves a lecture on its own</li>
         </ul>
       </section>
     </aside>
@@ -619,8 +711,17 @@ if (someVariable) {
       <h2>Prototypes</h2>
     </hgroup>
     <article>
+      <p>All objects have a prototype attribute (prototype object), which is the object's &quot;lineage&quot;</p>
+      <p>Built-in prototypes: <code>Object.prototype</code>, <code>Function.prototype</code>, <code>Array.prototype</code>, etc.</p>
       <p></p>
       <pre class="prettyprint" data-lang="javascript">
+let o = { x: 1 }; // o's prototype is Object.prototype
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+let a = [ 1, 2 ]; // a's prototype is Array.prototype
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+let f = () => {}; // f's prototype is Function.prototype
 </pre>
     </article>
   </slide>
@@ -629,8 +730,46 @@ if (someVariable) {
     <aside class="note">
       <section>
         <ul>
-          <li>JavaScript has objects but not classes (!)</li>
-          <li>es6 introduced the concept of a class, but it's just syntactic sugar</li>
+          <li>Classes don't really exist, it's just syntactic sugar</li>
+          <li>The second one is transformed to the first one (well, not exactly, but almost)</li>
+          <li>It's unfortunate because it's confusing to anyone familiar with 'classical' OO</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Prototypes vs classes</h2>
+    </hgroup>
+    <article>
+      <p></p>
+      <pre class="prettyprint" data-lang="javascript">
+function Person(name) {
+    this.name = name;
+}
+Person.prototype.getName = function() {
+    return this.name;
+}
+</pre>
+      <p></p>
+      <pre class="prettyprint" data-lang="javascript">
+class Person {  // es6 and later only
+    constructor(name) {
+        this.name = name;
+    }
+    getName() {
+        return this.name;
+    }
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>More powerful than the classical inheritance model</li>
+          <li>Single inheritance only</li>
+          <li><code>Function</code> and <code>Array</code> inherit from <code>Object</code>, which inherits from <code>null</code></li>
         </ul>
       </section>
     </aside>
@@ -649,99 +788,24 @@ let parent = {
 </pre>
       <pre class="prettyprint" data-lang="javascript">
 let child = Object.create(parent);
-child['name'] = "Bob";
-child.greet();  // prints <b>"Hello Bob"</b> to the console
+child['name'] = 'Bob';
+child.greet();  // prints 'Hello Bob' to the console
 </pre>
     </article>
   </slide>
+
+  <!-- <slide>
+    <article class="flexbox vcenter">
+      <img src="images/" alt="Prototypal inheritance diagram" style="width: 500px; height: 656px;">
+    </article>
+  </slide> -->
 
   <slide class="segue dark nobackground">
     <aside class="twbar"></aside>
     <hgroup>
       <h2>Awesome parts</h2>
-      <h3>First class functions, Object literals, Closures</h3>
+      <h3>Closures, Currying</h3>
     </hgroup>
-  </slide>
-
-  <slide>
-    <aside class="note">
-      <section>
-        <ul>
-          <li>What is printed to the console when we call createFunction()?</li>
-        </ul>
-      </section>
-    </aside>
-    <hgroup>
-      <h2>Functions as return types</h2>
-    </hgroup>
-    <article>
-      <pre class="prettyprint" data-lang="javascript">
-function createFunction() {
-    return () => {
-        console.log("Hello World");
-    }
-}
-</pre>
-    </article>
-  </slide>
-
-  <slide>
-    <hgroup>
-      <h2>Functions as arguments</h2>
-    </hgroup>
-    <article class="build">
-      <div>
-        <pre class="prettyprint" data-lang="javascript">
-function map(numbersArray, callbackFunction) {
-    let result = [];
-    for (let number of numbersArray) {
-        result.push(callbackFunction(number));
-    };
-    return result;
-};
-</pre>
-      </div>
-      <div>
-        <p>Usage:</p>
-        <pre class="prettyprint" data-lang="javascript">
-map([1, 2], (num) => num * num);
->> [1, 4]
-</pre>
-      </div>
-    </article>
-  </slide>
-
-  <slide>
-    <aside class="note">
-      <section>
-        <ul>
-          <li>Not exactly the same as JSON</li>
-        </ul>
-      </section>
-    </aside>
-    <hgroup>
-      <h2>Object literals</h2>
-    </hgroup>
-    <article>
-      <pre class="prettyprint" data-lang="javascript">
-let myArray = [1, 2, 3];
-
-let person = {
-    'firstName': 'John',
-    'lastName':  'Smith',
-};
-
-let nestedExample = {
-    'firstName': 'Jane',
-    'lastName':  'Smith',
-    'address': {
-        'country': 'Australia',
-        'city':    'Sydney'
-    },
-    'greeting': () => console.log('Hello World!');
-}
-</pre>
-    </article>
   </slide>
 
   <slide>
@@ -762,7 +826,7 @@ let outer = () => {
     let outerVariable = 'hello';
 
     return {
-        inner: () => console.log(outerVariable);
+        inner: () => { console.log(outerVariable); }
     };
 };
 // outerVariable is no longer in scope
@@ -792,13 +856,12 @@ let counter = () => {
     let value = 0;
 
     return {
-        getValue: () => value,
-        increment: () => {
-            value += 1;
-        }
+        getValue: () => { return value; },
+        increment: () => { value += 1; }
     };
 }
-let myCounter = counter();  // create an instance
+
+let myCounter = counter();  // create an object
 </pre>
       <p>Encapsulation: <code>value</code> can't be directly manipulated.</p>
     </article>
@@ -809,25 +872,30 @@ let myCounter = counter();  // create an instance
       <section>
         <ul>
           <li>Not about food</li>
-          <li>Create a new function by supplying some arguments of another function</li>
+          <li>Create new functions by supplying some arguments of another function</li>
         </ul>
       </section>
     </aside>
     <hgroup>
       <h2>Currying</h2>
     </hgroup>
-    <article>
+    <article class="build">
       <p>Create a new function by supplying some arguments of an another function.</p>
       <pre class="prettyprint" data-lang="javascript">
-function describe(adjective) {
-  return (thing) => console.log(thing + " is " + adjective);
+function describe(thing, adjective) {
+  console.log(thing + ' is ' + adjective);
+}
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+function describeWithCurrying(adjective) {
+  return (thing) => console.log(thing + ' is ' + adjective);
 }
 
-let isAwesome = describe("awesome");
-let isEvenBetter = describe("even better");
+let isAwesome = describeWithCurrying('awesome');
+let isEvenBetter = describeWithCurrying('even better');
 
-isAwesome("Melbourne");
-isEvenBetter("Sydney");
+isAwesome('Melbourne');
+isEvenBetter('Sydney');
 </pre>
     </article>
   </slide>
@@ -860,7 +928,7 @@ isEvenBetter("Sydney");
         <li><code>let</code> for variables that can be reassigned</li>
         <li><code>const</code> for variables that can't be reassigned</li>
       </ul>
-      <p>If you're writing es6 or later, don't use <code>var</code>!</p>
+      <p>If you're writing es6 or later, don't use <code>var</code>! Ever!</p>
     </article>
   </slide>
 
@@ -879,6 +947,15 @@ isEvenBetter("Sydney");
   </slide>
 
   <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>This happens because of hoisting.</li>
+          <li>When using <code>var</code>, the myString declaration is hoisted to the top of the function.</li>
+          <li>This doesn't happen with <code>let</code> or <code>const</code></li>
+        </ul>
+      </section>
+    </aside>
     <hgroup>
       <h2>var vs let</h2>
     </hgroup>
@@ -886,18 +963,18 @@ isEvenBetter("Sydney");
       <pre class="prettyprint" data-lang="javascript">
 () => {
     if (condition) {
-        var mystring = "hello";
+        var myString = 'hello';
     }
-    // mystring = "hello"
+    // myString = 'hello'
 }
-// mystring is no longer in scope
+// myString is no longer in scope
 </pre>
       <pre class="prettyprint" data-lang="javascript">
 () => {
     if (condition) {
-        let mystring = "hello";
+        let myString = 'hello';
     }
-    // mystring is no longer in scope
+    // myString is no longer in scope
 }
 </pre>
     </article>
@@ -922,15 +999,15 @@ isEvenBetter("Sydney");
 let first = 0;
 let scopeTest = () => {
   let first = 1;
-  console.log("first=" + first);
+  console.log('first=' + first);
   if (true) {
       var second = 2;
   }
-  console.log("second=" + second);
+  console.log('second=' + second);
 };
 scopeTest();
-console.log("first=" + first);
-console.log("second=" + second);
+console.log('first=' + first);
+console.log('second=' + second);
 </pre>
       <pre class="prettyprint" data-lang="javascript">
 >> first=1
@@ -1065,7 +1142,7 @@ while (queue.waitForEventMessage()) {
       <pre class="prettyprint" data-lang="javascript">
 function myFunction() {
     global1 = 1;
-    let nonGlobal = "I only exist inside myFunction";
+    let nonGlobal = 'I only exist inside myFunction';
 }
 var global2 = 2;
 window.global3 = 3;
