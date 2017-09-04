@@ -145,8 +145,8 @@
     <article>
       <p>Boring: A brief history of JavaScript</p>
       <p>Necessary: The type system</p>
-      <p>Interesting: Truthiness, Prototypal inheritance</p>
-      <p>Awesome: First class functions, Object literals, Closures</p>
+      <p>Interesting: Truthiness, Prototypes</p>
+      <p>Awesome: Closures, Currying</p>
       <p>Surprising: Scoping, Concurrency</p>
       <p>Bad: Global variables, Equals, and more</p>
     </article>
@@ -276,8 +276,8 @@
     <aside class="note">
       <section>
         <ul>
-          <li>We'll use es6 in this lecture</li>
-          <li>I recommend es6 and transpile to es5 using Babel</li>
+          <li>We'll use es7 in this lecture</li>
+          <li>I recommend es7 and transpile to es5 using Babel</li>
         </ul>
       </section>
     </aside>
@@ -704,6 +704,7 @@ if (someVariable) {
       <section>
         <ul>
           <li>Deserves a lecture on its own</li>
+          <li>Built-in prototypes: <code>Object.prototype</code>, <code>Function.prototype</code>, <code>Array.prototype</code>, etc.</li>
         </ul>
       </section>
     </aside>
@@ -711,9 +712,8 @@ if (someVariable) {
       <h2>Prototypes</h2>
     </hgroup>
     <article>
-      <p>All objects have a prototype attribute (prototype object), which is the object's &quot;lineage&quot;</p>
-      <p>Built-in prototypes: <code>Object.prototype</code>, <code>Function.prototype</code>, <code>Array.prototype</code>, etc.</p>
-      <p></p>
+      <p>All objects have a prototype attribute (also known as a prototype object), which is the object's &quot;lineage&quot;</p>
+      <p>Access an object's prototype using <code>myobject.__proto__</code> (non-standard) or <code>Object.getPrototypeOf(myobject)</code> (standard in es6 and later)</p>
       <pre class="prettyprint" data-lang="javascript">
 let o = { x: 1 }; // o's prototype is Object.prototype
 </pre>
@@ -779,7 +779,7 @@ class Person {  // es6 and later only
     <article>
       <p>A new object can inherit properties of an existing object.</p>
       <p>Example: Arrays inherit properties of the Array prototype object, such as <code>length</code></p>
-      <p>Another example:</p>
+      <p>Another example using <code>Object.create()</code>:</p>
       <pre class="prettyprint" data-lang="javascript">
 let parent = {
     'name': 'Alice',
@@ -1238,12 +1238,12 @@ null == undefined  // true
     <article>
       <ul>
         <li>Douglas Crockford: <a href="http://shop.oreilly.com/product/9780596517748.do">JavaScript: The Good Parts</a>, O'Reilly</li>
-        <li>es5: <a href="http://www.ecma-international.org/ecma-262/5.1/">ECMAScript Language Specification, 5.1 Edition</a></li>
-        <li>es6: <a href="http://www.ecma-international.org/ecma-262/6.0/">ECMAScript 2015 Language Specification</a></li>
+        <li>es5: <a href="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript Language Specification, 5.1 Edition</a></li>
+        <li>es6: <a href="https://www.ecma-international.org/ecma-262/7.0/">ECMAScript 2016 Language Specification</a></li>
         <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Mozilla Developer Network: JavaScript</a></li>
-        <li>Trevor Burnham: <a href="http://javascriptjabber.com/124-jsj-the-origin-of-javascript-with-brendan-eich/">The Origin of Javascript with Brendan Eich</a>, JavaScript Jabber, Episode 124, 3 Sept 2014</li>
-        <li>Charles Severance: <a href="http://www.computer.org/csdl/mags/co/2012/02/mco2012020007.html">JavaScript: Designing a Language in 10 Days</a>, IEEE Computer, Feb 2012</li>
-        <li>Paul Krill: <a href="http://www.infoworld.com/d/developer-world/javascript-creator-ponders-past-future-704">JavaScript creator ponders past, future</a>, 23 June 2008</li>
+        <li>Trevor Burnham: <a href="https://devchat.tv/js-jabber/124-jsj-the-origin-of-javascript-with-brendan-eich">The Origin of Javascript with Brendan Eich</a>, JavaScript Jabber, Episode 124, 3 Sept 2014</li>
+        <li>Charles Severance: <a href="https://www.computer.org/csdl/mags/co/2012/02/mco2012020007.html">JavaScript: Designing a Language in 10 Days</a>, IEEE Computer, Feb 2012</li>
+        <li>Paul Krill: <a href="https://www.infoworld.com/article/2653798/application-development/javascript-creator-ponders-past--future.html">JavaScript creator ponders past, future</a>, 23 June 2008</li>
       </ul>
     </article>
   </slide>
