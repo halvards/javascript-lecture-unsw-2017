@@ -363,8 +363,6 @@ Math.sqrt(-1);
 0.1 + 0.2;
 >> 0.30000000000000004
 </pre>
-      <!--<img src="images/emoticon_surprised-395x359.jpg" alt="Surprised" style="width: 158px; height: 144px;">-->
-      <!--<img src="images/emoticon_shocked-300x300.png" alt="Shocked" style="width: 150px; height: 150px;">-->
       <p>JavaScript uses binary floating point arithmetic (IEEE 754).</p>
     </article>
   </slide>
@@ -473,18 +471,18 @@ numbers.length;
       <p>Functions statement:</p>
       <pre class="prettyprint" data-lang="javascript">
 function hello(name) {
-    console.log('Hello ' + name);
+    console.log(`Hello ${name}`);
 };
 </pre>
       <p>Function expression:</p>
       <pre class="prettyprint" data-lang="javascript">
 let hello = function(name) {
-    console.log('Hello ' + name);
+    console.log(`Hello ${name}`);
 };
 </pre>
       <p>es6 introduced the arrow syntax:</p>
       <pre class="prettyprint" data-lang="javascript">
-let hello = (name) => console.log('Hello ' + name);
+let hello = (name) => console.log(`Hello ${name}`);
 </pre>
     </article>
   </slide>
@@ -620,7 +618,7 @@ let nestedExample = {
         'country': 'Australia',
         'city':    'Sydney'
     },
-    'greeting': () => console.log('Hello World!');
+    'greeting': () => console.log('Hello World!')
 }
 </pre>
     </article>
@@ -730,6 +728,82 @@ let f = () => {}; // f's prototype is Function.prototype
     <aside class="note">
       <section>
         <ul>
+          <li>More powerful than the classical inheritance model</li>
+          <li>Single inheritance only</li>
+          <li>The <code>new</code> keyword is one of the bad parts. It makes it look like classic OO, and it doesn't fail if you forget it.</li>
+          <li>Shape is a constructor function</li>
+          <li>Don't confuse the prototype property on functions with the __proto__ property</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Prototype inheritance</h2>
+    </hgroup>
+    <article>
+      <p>A new object can inherit properties of an existing object.</p>
+      <p>Example: Arrays automatically inherit properties of the Array prototype object, such as <code>length</code></p>
+      <pre class="prettyprint" data-lang="javascript">
+let a = [ 1, 2 ];
+a.length; // length is a property of Array.prototype
+>> 2
+</pre>
+      <p>Prototypes form a chain to <code>Object.prototype</code>, and then <code>null</code></p>
+      <pre class="prettyprint" data-lang="javascript">
+a.__proto__;
+>> [] // this is Array.prototype
+a.__proto__.__proto__;
+>> {} // this is Object.prototype
+a.__proto__.__proto__.__proto__;
+>> null
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>The <code>new</code> keyword is one of the bad parts. It makes it look like classic OO, and it doesn't fail if you forget it.</li>
+          <li>Don't confuse the prototype property on functions with the __proto__ property</li>
+          <li>The uppercase letter is a convention for constructor functions</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Prototype inheritance using <code>new</code></h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+function Shape(name) { // constructor function
+    this.name = name;
+}
+Shape.prototype.describe = function() {
+    console.log(`I am a ${this.name}`);
+}
+let shape = new Shape('rectangle');
+shape.color = 'red';
+shape.describe();
+>> 'I am a rectangle'
+</pre>
+      <pre class="prettyprint" data-lang="javascript">
+shape.__proto__
+>> Shape { describe: [Function] }
+shape.__proto__.__proto__
+>> {} // this is Object.prototype
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <img src="images/prototype-graph-628x427.png" alt="Prototypal inheritance graph" style="width: 800px; height: 544px;">
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
           <li>Classes don't really exist, it's just syntactic sugar</li>
           <li>The second one is transformed to the first one (well, not exactly, but almost)</li>
           <li>It's unfortunate because it's confusing to anyone familiar with 'classical' OO</li>
@@ -767,38 +841,34 @@ class Person {  // es6 and later only
     <aside class="note">
       <section>
         <ul>
-          <li>More powerful than the classical inheritance model</li>
-          <li>Single inheritance only</li>
+          <li>The first argument to Object.create() is the prototype object of the newly created object.</li>
           <li><code>Function</code> and <code>Array</code> inherit from <code>Object</code>, which inherits from <code>null</code></li>
         </ul>
       </section>
     </aside>
     <hgroup>
-      <h2>Prototypal inheritance</h2>
+      <h2>Inheritance using <code>Object.create()</code></h2>
     </hgroup>
     <article>
-      <p>A new object can inherit properties of an existing object.</p>
-      <p>Example: Arrays inherit properties of the Array prototype object, such as <code>length</code></p>
-      <p>Another example using <code>Object.create()</code>:</p>
+      <p>The first argument to Object.create() is the prototype object of the newly created object.</p>
       <pre class="prettyprint" data-lang="javascript">
 let parent = {
     'name': 'Alice',
-    'greet': () => console.log('Hello ' + this.name);
+    'greet': () => console.log('Hello')
 };
 </pre>
       <pre class="prettyprint" data-lang="javascript">
 let child = Object.create(parent);
-child['name'] = 'Bob';
-child.greet();  // prints 'Hello Bob' to the console
+child.name = 'Bob';
+child.greet();
+>> 'Hello'
+child.name;
+>> 'Bob'
+Object.getPrototypeOf(child).name;
+>> 'Alice'
 </pre>
     </article>
   </slide>
-
-  <!-- <slide>
-    <article class="flexbox vcenter">
-      <img src="images/" alt="Prototypal inheritance diagram" style="width: 500px; height: 656px;">
-    </article>
-  </slide> -->
 
   <slide class="segue dark nobackground">
     <aside class="twbar"></aside>
@@ -857,7 +927,7 @@ let counter = () => {
 
     return {
         getValue: () => { return value; },
-        increment: () => { value += 1; }
+        increment: () => { value++; }
     };
 }
 
@@ -883,12 +953,12 @@ let myCounter = counter();  // create an object
       <p>Create a new function by supplying some arguments of an another function.</p>
       <pre class="prettyprint" data-lang="javascript">
 function describe(thing, adjective) {
-  console.log(thing + ' is ' + adjective);
+  console.log(`{thing} is ${adjective}`);
 }
 </pre>
       <pre class="prettyprint" data-lang="javascript">
 function describeWithCurrying(adjective) {
-  return (thing) => console.log(thing + ' is ' + adjective);
+  return (thing) => console.log(`${thing} is ${adjective}`);
 }
 
 let isAwesome = describeWithCurrying('awesome');
@@ -928,7 +998,7 @@ isEvenBetter('Sydney');
         <li><code>let</code> for variables that can be reassigned</li>
         <li><code>const</code> for variables that can't be reassigned</li>
       </ul>
-      <p>If you're writing es6 or later, don't use <code>var</code>! Ever!</p>
+      <p>If you're writing es6 or later, don't use <code>var</code></p>
       <p>Why?</p>
       <ul>
         <li><code>var</code> declarations are <i>hoisted</i> to the top of the function</li>
@@ -1004,15 +1074,15 @@ isEvenBetter('Sydney');
 let first = 0;
 let scopeTest = () => {
   let first = 1;
-  console.log('first=' + first);
+  console.log(`first=${first}`);
   if (true) {
       var second = 2;
   }
-  console.log('second=' + second);
+  console.log(`second=${second}`);
 };
 scopeTest();
-console.log('first=' + first);
-console.log('second=' + second);
+console.log(`first=${first}`);
+console.log(`second=${second}`);
 </pre>
       <pre class="prettyprint" data-lang="javascript">
 >> first=1
