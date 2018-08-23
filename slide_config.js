@@ -19,7 +19,7 @@ var SLIDE_CONFIG = {
   // Author information
   presenters: [{
     name: 'Halvard Skogsrud',
-    company: 'IAG',
+    company: '',
     twitter: '@halvards',
     github: 'https://github.com/halvards'
   }]
